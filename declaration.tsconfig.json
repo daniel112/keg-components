@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig",
+  "exclude": [
+    "test/**/*.js",
+    "*.stories.js"
+  ],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "removeComments": false,
+    "outDir": "tsc-test"
+
+  }
+}

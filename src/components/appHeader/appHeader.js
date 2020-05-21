@@ -85,7 +85,11 @@ export const AppHeader = (props) => {
 }
 
 AppHeader.propTypes = {
-  title: PropTypes.string,
+  /**
+   * comment on tittl
+   * testing isRequired downcompile
+   */
+  title: PropTypes.string.isRequired,
   styles: PropTypes.object,
   RightComponent: PropTypes.element,
   LeftComponent: PropTypes.element,

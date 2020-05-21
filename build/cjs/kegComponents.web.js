@@ -116,19 +116,15 @@ function _objectWithoutProperties(source, excluded) {
 }
 
 function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
 
 function _arrayWithHoles(arr) {
@@ -136,14 +132,11 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
 
 function _iterableToArrayLimit(arr, i) {
-  if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-    return;
-  }
-
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
   var _arr = [];
   var _n = true;
   var _d = false;
@@ -169,12 +162,29 @@ function _iterableToArrayLimit(arr, i) {
   return _arr;
 }
 
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 var View = React__default.forwardRef(function (_ref, ref) {
@@ -565,9 +575,9 @@ var useMediaProps = function useMediaProps(_ref) {
         loading: styles.loading
       }, mediaStyles)
     }
-    : _objectSpread2({
+    : _objectSpread2(_objectSpread2({
       type: type
-    }, media, {
+    }, media), {}, {
       styles: jsutils.deepMerge(
       {
         loading: styles.loading
@@ -776,7 +786,7 @@ var getChildren = function getChildren(Children) {
   }, Text$1);
 };
 var checkDisabled = function checkDisabled(mainStyles, btnStyles, disabled) {
-  return disabled ? _objectSpread2({}, mainStyles, {}, jsutils.get(btnStyles, 'disabled.main')) : mainStyles;
+  return disabled ? _objectSpread2(_objectSpread2({}, mainStyles), jsutils.get(btnStyles, 'disabled.main')) : mainStyles;
 };
 var ButtonWrapper = function ButtonWrapper(props) {
   var Element = props.Element,
@@ -943,7 +953,7 @@ var AppHeader = function AppHeader(props) {
   }, RightComponent)));
 };
 AppHeader.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   styles: PropTypes.object,
   RightComponent: PropTypes.element,
   LeftComponent: PropTypes.element,
@@ -1041,7 +1051,7 @@ var withTouch = function withTouch(Component) {
 };
 
 var TouchableIcon = withTouch(Icon);
-TouchableIcon.propTypes = _objectSpread2({}, TouchableIcon.propTypes, {}, Icon.propTypes);
+TouchableIcon.propTypes = _objectSpread2(_objectSpread2({}, TouchableIcon.propTypes), Icon.propTypes);
 
 var TextBox = function TextBox(props) {
   var text = props.text,
@@ -1585,8 +1595,8 @@ var useCheckedState = function useCheckedState(isChecked, themeStyles) {
   var theme = reTheme.useTheme();
   return React.useMemo(function () {
     return theme.join(themeStyles, {
-      area: _objectSpread2({}, jsutils.get(themeStyles, 'area.off'), {}, isChecked && jsutils.get(themeStyles, 'area.on')),
-      indicator: _objectSpread2({}, jsutils.get(themeStyles, 'indicator.off'), {}, isChecked && jsutils.get(themeStyles, 'indicator.on'))
+      area: _objectSpread2(_objectSpread2({}, jsutils.get(themeStyles, 'area.off')), isChecked && jsutils.get(themeStyles, 'area.on')),
+      indicator: _objectSpread2(_objectSpread2({}, jsutils.get(themeStyles, 'indicator.off')), isChecked && jsutils.get(themeStyles, 'indicator.on'))
     });
   }, [isChecked]);
 };
@@ -1647,7 +1657,7 @@ var SwitchWrapper = function SwitchWrapper(props) {
   }, LeftComponent && React__default.createElement(SideComponent, {
     Component: LeftComponent,
     style: activeStyles.left
-  }), SwitchComponent ? renderFromType(SwitchComponent, _objectSpread2({}, props, {
+  }), SwitchComponent ? renderFromType(SwitchComponent, _objectSpread2(_objectSpread2({}, props), {}, {
     styles: activeStyles
   })) : React__default.createElement(Element, _extends({
     elProps: elProps,
@@ -1844,7 +1854,7 @@ var Input = function Input(props) {
     isWeb: true
   }, props));
 };
-Input.propTypes = _objectSpread2({}, InputWrapper.propTypes, {
+Input.propTypes = _objectSpread2(_objectSpread2({}, InputWrapper.propTypes), {}, {
   theme: PropTypes.object,
   style: PropTypes.object,
   value: PropTypes.string,
@@ -2004,7 +2014,7 @@ var Container = function Container(_ref) {
     flex: size ? size : hasWidth(style) ? 0 : 1
   } : {};
   return React__default.createElement(View, _extends({}, props, {
-    style: _objectSpread2({}, flexStyle, {}, style)
+    style: _objectSpread2(_objectSpread2({}, flexStyle), style)
   }, getPressHandler(getPlatform(), onClick || onPress)), children);
 };
 Container.propTypes = {
@@ -2022,7 +2032,7 @@ var Row = function Row(_ref) {
       props = _objectWithoutProperties(_ref, ["children", "style"]);
   var theme = reTheme.useTheme();
   return React__default.createElement(Container, _extends({}, props, {
-    style: _objectSpread2({}, jsutils.get(theme, 'layout.grid.row'), {}, style),
+    style: _objectSpread2(_objectSpread2({}, jsutils.get(theme, 'layout.grid.row')), style),
     flexDir: "row"
   }), children);
 };
@@ -2269,7 +2279,7 @@ var defaultSectionStyle = {
   backgroundColor: 'transparent'
 };
 var defaultSideSectionStyle = {
-  main: _objectSpread2({}, defaultSectionStyle, {
+  main: _objectSpread2(_objectSpread2({}, defaultSectionStyle), {}, {
     flexDirection: 'row',
     maxWidth: '20%'
   }),
@@ -2287,7 +2297,7 @@ var defaultSideSectionStyle = {
   },
   native: {
     content: {
-      container: _objectSpread2({}, flex.center, {
+      container: _objectSpread2(_objectSpread2({}, flex.center), {}, {
         flex: 0
       })
     }
@@ -2296,7 +2306,7 @@ var defaultSideSectionStyle = {
 var appHeader = {
   default: {
     container: {
-      $native: _objectSpread2({}, flex.justify.center, {}, flex.align.left, {
+      $native: _objectSpread2(_objectSpread2(_objectSpread2({}, flex.justify.center), flex.align.left), {}, {
         flex: 0,
         shadow: {
           shadowColor: '#000',
@@ -2313,16 +2323,16 @@ var appHeader = {
           boxShadow: '0px 4px 7px 0px #9E9E9E'
         }
       },
-      $all: _objectSpread2({
+      $all: _objectSpread2(_objectSpread2({
         backgroundColor: jsutils.get(colors$1, 'surface.primary.colors.dark'),
         height: 70,
         width: '100%'
-      }, flex.left, {}, flex.row)
+      }, flex.left), flex.row)
     },
     side: {
       left: {
         $all: {
-          main: _objectSpread2({}, flex.left, {}, defaultSideSectionStyle.main, {}, flex.align.center),
+          main: _objectSpread2(_objectSpread2(_objectSpread2({}, flex.left), defaultSideSectionStyle.main), flex.align.center),
           content: _objectSpread2({}, defaultSideSectionStyle.content)
         },
         $web: {
@@ -2334,7 +2344,7 @@ var appHeader = {
       },
       right: {
         $all: {
-          main: _objectSpread2({}, flex.right, {}, defaultSideSectionStyle.main, {}, flex.align.center),
+          main: _objectSpread2(_objectSpread2(_objectSpread2({}, flex.right), defaultSideSectionStyle.main), flex.align.center),
           content: _objectSpread2({}, defaultSideSectionStyle.content)
         },
         $web: {
@@ -2357,7 +2367,7 @@ var appHeader = {
         content: {}
       },
       $all: {
-        main: _objectSpread2({}, flex.center, {}, defaultSectionStyle, {
+        main: _objectSpread2(_objectSpread2(_objectSpread2({}, flex.center), defaultSectionStyle), {}, {
           width: '60%'
         }),
         content: {}
@@ -2653,7 +2663,7 @@ var contained$1 = {
     divider: {}
   },
   header: {
-    container: _objectSpread2({}, flex.left, {}, flex.column),
+    container: _objectSpread2(_objectSpread2({}, flex.left), flex.column),
     text: {
       fontSize: 16,
       color: colorPalette.black02,
@@ -3217,7 +3227,7 @@ var sharedForm = {
 
 var input = {
   default: {
-    $all: _objectSpread2({}, sharedForm.border, {}, sharedForm.inputs),
+    $all: _objectSpread2(_objectSpread2({}, sharedForm.border), sharedForm.inputs),
     $web: _objectSpread2({
       outline: 'none',
       boxSizing: 'border-box'
@@ -3234,8 +3244,8 @@ var radio = {};
 
 var select = {
   default: {
-    $all: _objectSpread2({}, sharedForm.border, {}, sharedForm.inputs),
-    $web: _objectSpread2({}, typography.font.family, {
+    $all: _objectSpread2(_objectSpread2({}, sharedForm.border), sharedForm.inputs),
+    $web: _objectSpread2(_objectSpread2({}, typography.font.family), {}, {
       outline: 'none',
       boxSizing: 'border-box'
     }),
