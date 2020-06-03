@@ -21,7 +21,7 @@ module.exports = {
     'jest/globals': true,
     'react-native/react-native': true,
   },
-  plugins: [ 'jest', 'react', 'react-native', 'prettier' ],
+  plugins: [ 'jest', 'react', 'react-native' ],
   extends: [ 'plugin:jest/recommended', 'plugin:react/recommended' ],
   settings: {
     react: {
@@ -29,36 +29,10 @@ module.exports = {
     },
   },
   rules: {
-    'jest/no-disabled-tests': 'error',
-    'jest/no-focused-tests': 'error',
-    'jest/no-identical-title': 'error',
-    'jest/prefer-to-have-length': 'warn',
-    'jest/valid-expect': 'error',
-    'react-native/no-raw-text': 2,
-    'react-native/no-unused-styles': 2,
-    'react-native/split-platform-components': 2,
+    /* General */
     'no-console': 'error',
     'brace-style': [ 'error', 'stroustrup' ],
     'indent': ['error', 2, {'offsetTernaryExpressions': true}],
-    'react/jsx-curly-spacing': [
-      2,
-      {
-        when: 'always',
-        attributes: false,
-        children: true,
-        spacing: {
-          objectLiterals: 'never',
-        },
-      },
-    ],
-    'no-unused-vars': [
-      'error',
-      {
-        args: 'none',
-        ignoreRestSiblings: true,
-      },
-    ],
-    'react/prop-types': 0,
     quotes: [
       'error',
       'single',
@@ -102,5 +76,35 @@ module.exports = {
         after: true,
       },
     ],
+    'no-unused-vars': [
+      'error',
+      {
+        args: 'none',
+        ignoreRestSiblings: true,
+      },
+    ],
+    /* Jest */
+    'jest/no-disabled-tests': 'error',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
+    /* React-Native */
+    'react-native/no-raw-text': 1,
+    'react-native/no-unused-styles': 2,
+    'react-native/split-platform-components': 2,
+    /* React */
+    'react/jsx-curly-spacing': [
+      2,
+      {
+        when: 'always',
+        attributes: false,
+        children: true,
+        spacing: {
+          objectLiterals: 'never',
+        },
+      },
+    ],
+    'react/prop-types': 0,
   },
 }
