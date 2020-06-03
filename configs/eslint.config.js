@@ -30,7 +30,7 @@ module.exports = {
   },
   rules: {
     /* General */
-    'no-console': 'error',
+    'no-console': ['error', { allow: ["warn", "error"] }],
     'brace-style': [ 'error', 'stroustrup' ],
     'indent': ['error', 2, {'offsetTernaryExpressions': true}],
     quotes: [
