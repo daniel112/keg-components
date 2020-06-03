@@ -40,7 +40,8 @@
     "sb:web": "RE_PLATFORM=web start-storybook -p 60710",
     "sb:native": "RE_PLATFORM=native start-storybook -p 60710",
     "sb:server": "npx http-server docs",
-    "jsconfig": "cd scripts && node jsconfig.js web"
+    "jsconfig": "cd scripts && node jsconfig.js web",
+    "format:prettier": "prettier --config ./configs/prettier.config.js --ignore-path .eslintignore --write '**/*.{js,jsx}'"
   },
   "dependencies": {},
   "devDependencies": {
@@ -73,6 +74,7 @@
     "jest": "24.7.1",
     "jest-expo": "^37.0.0",
     "jsutils": "git+https://github.com/lancetipton/jsutils.git#3.2.1",
+    "prettier": "2.0.5",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-is": "16.12.0",
