@@ -42,7 +42,8 @@
     "sb:server": "npx http-server docs",
     "jsconfig": "cd scripts && node jsconfig.js web",
     "format:eslint": "eslint -c ./configs/eslint.config.js . --fix --quiet",
-    "format:prettier": "prettier --ignore-path .eslintignore --write '**/*.{js,jsx}'"
+    "format:prettier": "prettier --ignore-path .eslintignore --write '**/*.{js,jsx}'",
+    "format": "yarn format:prettier && yarn format:eslint"
   },
   "dependencies": {},
   "devDependencies": {

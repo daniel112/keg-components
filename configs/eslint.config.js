@@ -1,4 +1,3 @@
-console.log('hi')
 module.exports = {
   parser: 'babel-eslint',
   root: true,
@@ -40,6 +39,7 @@ module.exports = {
     'react-native/split-platform-components': 2,
     'no-console': 'error',
     'brace-style': [ 'error', 'stroustrup' ],
+    'indent': ['error', 2, {'offsetTernaryExpressions': true}],
     'react/jsx-curly-spacing': [
       2,
       {
