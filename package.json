@@ -41,7 +41,8 @@
     "sb:native": "RE_PLATFORM=native start-storybook -p 60710",
     "sb:server": "npx http-server docs",
     "jsconfig": "cd scripts && node jsconfig.js web",
-    "format:prettier": "prettier --config ./configs/prettier.config.js --ignore-path .eslintignore --write '**/*.{js,jsx}'"
+    "format:eslint": "eslint -c ./configs/eslint.config.js . --fix --quiet",
+    "format:prettier": "prettier --ignore-path .eslintignore --write '**/*.{js,jsx}'"
   },
   "dependencies": {},
   "devDependencies": {
@@ -64,11 +65,18 @@
     "@storybook/react": "5.3.6",
     "@storybook/storybook-deployer": "2.8.1",
     "app-root-path": "3.0.0",
+    "babel-eslint": "10.1.0",
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
     "babel-plugin-module-resolver": "4.0.0",
     "babel-plugin-react-native-web": "0.11.5",
     "babel-preset-react-native": "4.0.1",
+    "eslint": "7.1.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-jest": "23.13.2",
+    "eslint-plugin-prettier": "3.1.3",
+    "eslint-plugin-react": "7.20.0",
+    "eslint-plugin-react-native": "3.8.1",
     "expo": "36.0.0",
     "expo-font": "8.0.0",
     "jest": "24.7.1",
@@ -100,9 +108,6 @@
     "expo-font": "^8.0.0",
     "jsutils": "git+https://github.com/lancetipton/jsutils.git",
     "react": "^16.9.0"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
