@@ -11,4 +11,5 @@ module.exports = {
   arrowParens: 'avoid',
   quoteProps: 'as-needed',
   endOfLine: 'lf',
+  printWidth: 50
 }
