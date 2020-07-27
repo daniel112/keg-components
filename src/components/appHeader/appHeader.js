@@ -145,8 +145,6 @@ const Side = props => {
   const position = right ? 'right' : 'left'
   // get the styles for the specified position
   const contentStyles = get(style, [ position, 'content', 'main' ])
-  position === 'left' && console.log({ contentStyles })
-  console.log({ contentStyles })
   const iconProps = {
     style,
     iconName,
