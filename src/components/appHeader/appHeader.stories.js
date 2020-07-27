@@ -18,13 +18,15 @@ storiesOf('Display | AppHeader', module)
       <AppHeader
         title={'Styled Title & height'}
         styles={{
-          container: { height: 100 },
-          center: {
-            content: {
-              title: {
-                color: '#1e6073',
-                fontStyle: 'italic',
-                fontWeight: 'bold',
+          main: { height: 100 },
+          content: {
+            center: {
+              content: {
+                title: {
+                  color: '#1e6073',
+                  fontStyle: 'italic',
+                  fontWeight: 'bold',
+                },
               },
             },
           },
@@ -43,7 +45,7 @@ storiesOf('Display | AppHeader', module)
       <AppHeader
         shadow
         title={'With Shadow, Custom Icon, no left action'}
-        styles={{ container: { height: 70, backgroundColor: 'red' } }}
+        styles={{ main: { height: 70, backgroundColor: 'red' } }}
         leftIcon={'android'}
         rightIcon={'search'}
         onRightClick={action('Right Section Clicked!')}
