@@ -40,11 +40,9 @@ export const appHeader = {
       $all: {
         ...flex.justify.center,
         ...flex.align.left,
-        flex: 0,
         backgroundColor: get(colors, 'surface.primary.colors.dark'),
         height: 70,
         width: '100%',
-        ...flex.left,
         ...flex.row,
       },
     },
