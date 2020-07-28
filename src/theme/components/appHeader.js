@@ -38,12 +38,11 @@ export const appHeader = {
     },
     main: {
       $all: {
-        ...flex.justify.center,
-        ...flex.align.left,
+        justifyContent: 'center',
         backgroundColor: get(colors, 'surface.primary.colors.dark'),
         height: 70,
         width: '100%',
-        ...flex.row,
+        flexDirection: 'row',
       },
     },
     content: {
