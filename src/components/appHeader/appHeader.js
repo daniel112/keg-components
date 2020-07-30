@@ -34,6 +34,7 @@ export const AppHeader = props => {
     themePath,
     type = 'default',
     children,
+    ...elprops
   } = props
 
   const [headerStyles] = useThemePath(themePath || `appHeader.${type}`, styles)
@@ -42,6 +43,7 @@ export const AppHeader = props => {
   return (
     <View
       data-class='app-header-main'
+      {...elprops}
       style={theme.join(
         headerStyles.main,
         shadow && get(headerStyles, ['shadow'])
